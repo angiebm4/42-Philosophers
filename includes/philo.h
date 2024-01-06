@@ -6,7 +6,7 @@
 /*   By: abarrio- <abarrio-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 11:07:34 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/01/06 20:23:56 by abarrio-         ###   ########.fr       */
+/*   Updated: 2024/01/06 22:00:21 by abarrio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ struct					s_data
 	pthread_mutex_t		*forks;
 	pthread_mutex_t		mutex;
 	pthread_mutex_t		print;
-	size_t				start_time; // inicializarlo
+	size_t				start_time;
 	// time medido en milisegundos
 	size_t				time_die;
 	size_t				time_eat;
@@ -49,11 +49,11 @@ struct					s_data
 struct					s_philo
 {
 	pthread_t			thread_id;
-	size_t				who; // inicializarlo
+	size_t				who;
 	t_data				*data;
 	size_t				times_eat;
 	size_t				last_time_eat;
-	pthread_mutex_t		*rigth_fork; //que tipo de variable tiene que ser ?
+	pthread_mutex_t		*rigth_fork;
 	pthread_mutex_t		*left_fork;
 };
 
@@ -71,7 +71,8 @@ void	print_error(t_data *data);
 void	print_state(t_philo *philo, int state);
 
 // doctor 
-int	check_death(t_data *data);
+void	*check_death(void *src);
+void	doctor(t_data *data);
 
 // rutine
 void	*rutine(void *src);

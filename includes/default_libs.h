@@ -6,7 +6,7 @@
 /*   By: abarrio- <abarrio-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 11:41:03 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/01/04 11:19:20 by abarrio-         ###   ########.fr       */
+/*   Updated: 2024/01/06 21:40:40 by abarrio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@
 # include <unistd.h>
 # include <string.h>
 # include <pthread.h>
+# include <sys/time.h>
 
 #endif

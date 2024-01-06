@@ -6,7 +6,7 @@
 /*   By: abarrio- <abarrio-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 11:07:37 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/01/06 20:24:02 by abarrio-         ###   ########.fr       */
+/*   Updated: 2024/01/06 22:01:19 by abarrio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	main(int argc, char *argv[])
 	// un mutex para que cuando un philo escriba no puedan escribir el resto
 	// tener en cuenta
 	pthread_mutex_init(&data.print, NULL);
+	doctor(&data);
 	while (i < data.nb_philo)
 	{
 		data.philo[i].data = &data;
