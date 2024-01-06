@@ -13,6 +13,11 @@ CFLAGS =-Wall -Werror -Wextra -fsanitize=address -g3 -pthread
 # CFLAGS =-Wall -Werror -Wextra -g3 -pthread
 
 SRC =	main.c \
+		philo_utils.c \
+		print_msg.c \
+		doctor.c \
+		init.c \
+		rutine.c
 
 OBJ_DIR = obj/
 OBJ = $(SRC:%.c=$(OBJ_DIR)%.o)
@@ -20,7 +25,7 @@ OBJ = $(SRC:%.c=$(OBJ_DIR)%.o)
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@echo "$(PINK)Compiling the pipex.$(CLEAR)"
+	@echo "$(PINK)Compiling the philo.$(CLEAR)"
 #	$(CC) $(OBJ) -o $(NAME) -g3 -pthread
 	$(CC) $(OBJ) -o $(NAME) -fsanitize=address -g3 -pthread
 	@echo "$(GREEN)[OK]\n$(CLEAR)$(GREEN)Success!$(CLEAR)\n"
