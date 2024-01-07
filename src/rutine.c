@@ -6,7 +6,7 @@
 /*   By: abarrio- <abarrio-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 19:15:59 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/01/07 15:23:03 by abarrio-         ###   ########.fr       */
+/*   Updated: 2024/01/07 17:56:54 by abarrio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 
 int	ft_eat(t_philo *philo)
 {
-	if (doctor(philo) == 1)
-		return (1);
-	// print_state(philo, THINKING); como esperar a que se desbloqueen los mutex
+	// print_state(philo, THINKING); como esperar a que se desbloqueen los mutex ¿?¿
 	if (doctor(philo) == 1)
 		return (1);
 	pthread_mutex_lock(philo->left_fork);
@@ -54,6 +52,8 @@ int	ft_sleep(t_philo *philo)
 		return (1);
 	print_state(philo, SLEEPING);
 	usleep(philo->data->time_sleep * 1000);
+	if (doctor(philo) == 1)
+		return (1);
 	return (0);
 }
 
@@ -65,12 +65,24 @@ void	*rutine(void *src)
 	philo = src;
 	while (philo->data->init_program == 1)
 		usleep(1000);
+	if (philo->data->nb_philo <= 1)
+	{
+		print_state(philo, DEATH);
+		printf(CYAN"loneliness is not the best buddy for philosophers\n"CLEAR);
+		return (NULL); // se tiene que morir??
+	}
+	if (philo->data->times_must_eat == 0)
+	{
+		printf(GREENFOSFI"bro bro let us eattt fuuckkk!!?¿¿¿¡¡¡!\n"CLEAR);
+		return (NULL);
+	}
 	while(1)
 	{
 		if (ft_eat(philo) == 1)
 			return (NULL);
 		if (ft_sleep(philo) == 1)
 			return (NULL);
+		print_state(philo, THINKING);
 	}
 	return (NULL);
 }

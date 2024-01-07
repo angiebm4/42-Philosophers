@@ -6,7 +6,7 @@
 /*   By: abarrio- <abarrio-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 11:07:37 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/01/07 15:16:38 by abarrio-         ###   ########.fr       */
+/*   Updated: 2024/01/07 18:07:29 by abarrio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,12 @@ int	main(int argc, char *argv[])
 {
 	t_data	data;
 	size_t	i;
-
+	 
+	// por algun motivo nunca me termina el programa que coño le pasa aaasdhajfgfvhb
+	// controlar los deathlocks ?? realmente esto sucece en mi codigo? 
+	// un deathlock es cuando cada filosofo pilla un teneor por lo que se bloquea el 
+	// sitema y estan todos esperando a que se desbloquee el otro tenedor pero nunca lo hace 
+	// hay que gestionar posibles errores del mutex y de los hilos???????
 	// atexit(leaks);
 	init_data(&data, argc, argv);
 	i = 0;
@@ -33,6 +38,9 @@ int	main(int argc, char *argv[])
 	// no hay que empezar a ejecutar el programa hasta qe todos los hilos se han creado
 	// un mutex para que cuando un philo escriba no puedan escribir el resto
 	// tener en cuenta
+	// mi doctor tiene que ser un hilo a parte como la primera vez que lo hice pero como 
+	// mierdas aro la simulacion , se supone que los filosofos no se pueden comunicar entre si pero
+	// suppongo que si con el medico mmmmmm
 	while (i < data.nb_philo)
 	{
 		data.philo[i].data = &data;
@@ -57,13 +65,6 @@ int	main(int argc, char *argv[])
 		printf("Termino el %ld philosofo\n", i);
 	}
 	// liberar toda la memria y destruir todos los mutex
-	pthread_mutex_destroy(&data.mutex);
-	pthread_mutex_destroy(&data.print);
-	pthread_mutex_destroy(&data.doctor);
-	while (i < data.nb_philo)
-	{
-		pthread_mutex_destroy(&data.forks[i]);
-		i++;
-	}
+	ft_clean_trash(&data);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: abarrio- <abarrio-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 12:02:04 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/01/07 14:58:28 by abarrio-         ###   ########.fr       */
+/*   Updated: 2024/01/07 18:06:36 by abarrio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,22 @@ size_t	get_time(void)
 	gettimeofday(&t_time, NULL);
 	time_ms = (t_time.tv_sec * 1000) + (t_time.tv_usec / 1000);
 	return(time_ms);
+}
+
+void	ft_clean_trash(t_data *data)
+{
+	size_t	i;
+
+	i = 0;
+	pthread_mutex_destroy(&data->mutex);
+	pthread_mutex_destroy(&data->print);
+	pthread_mutex_destroy(&data->doctor);
+	while (i < data->nb_philo)
+	{
+		pthread_mutex_destroy(&data->forks[i]);
+		free(data->philo);
+		i++;
+	}
 }
 
 // void	ft_end_program()

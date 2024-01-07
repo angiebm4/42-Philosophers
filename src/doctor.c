@@ -6,7 +6,7 @@
 /*   By: abarrio- <abarrio-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 16:52:44 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/01/07 14:20:23 by abarrio-         ###   ########.fr       */
+/*   Updated: 2024/01/07 18:09:38 by abarrio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ int	ft_check_death(t_philo *philo)
 		if (philo->data->philo_death == 1)
 		{
 			printf("alguien la casco\n");
+			pthread_mutex_lock(&philo->data->print);
 			return (1);
 		}
 		i++;
@@ -88,6 +89,7 @@ int	ft_check_satisfied(t_philo *philo)
 		if (count_satis_philos == (size_t)philo->data->times_must_eat)
 		{
 			printf("ya hemos comido todo lo que hay que comer");
+			pthread_mutex_lock(&philo->data->print);
 			return (1);
 		}
 		else if (philo->data->philo[i].times_eat == (size_t)philo->data->times_must_eat)

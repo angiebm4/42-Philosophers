@@ -6,7 +6,7 @@
 /*   By: abarrio- <abarrio-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 11:07:34 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/01/07 15:12:19 by abarrio-         ###   ########.fr       */
+/*   Updated: 2024/01/07 18:07:51 by abarrio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ size_t	get_time(void);
 void	assign_forks(t_data *data);
 void	assing_who(t_data *data);
 void	init_data(t_data *data, int argc, char *argv[]);
+void	ft_clean_trash(t_data *data);
 
 // print msgs
 void	print_error(t_data *data);
