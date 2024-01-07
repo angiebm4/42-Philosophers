@@ -6,7 +6,7 @@
 /*   By: abarrio- <abarrio-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 11:07:34 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/01/06 22:00:21 by abarrio-         ###   ########.fr       */
+/*   Updated: 2024/01/07 15:12:19 by abarrio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,12 @@
 # define ERROR_INVALID_ARGS 1
 
 // state of the philosofer
-# define TAKING_A_FORK 1
-# define EATING 2
-# define SLEEPING 3
-# define THINKING 4
-# define DEATH 5
+# define TAKING_A_FORK_R 1
+# define TAKING_A_FORK_L 2
+# define EATING 3
+# define SLEEPING 4
+# define THINKING 5
+# define DEATH 6
 
 typedef struct s_data	t_data;
 typedef struct s_philo	t_philo;
@@ -35,15 +36,18 @@ struct					s_data
 	pthread_mutex_t		*forks;
 	pthread_mutex_t		mutex;
 	pthread_mutex_t		print;
+	pthread_mutex_t		doctor; // si la funcion devuekve 1 se acabo el programa si devuelve 0 sigue el programa
 	size_t				start_time;
 	// time medido en milisegundos
 	size_t				time_die;
 	size_t				time_eat;
 	size_t				time_sleep;
-	size_t				times_must_eat;
+	int					times_must_eat;
+	size_t				all_satisfied;
 	int					error;
 	int					init_program;
 	int					philo_death; // 1 si 0 no
+	int					end_program;
 };
 
 struct					s_philo
@@ -71,8 +75,7 @@ void	print_error(t_data *data);
 void	print_state(t_philo *philo, int state);
 
 // doctor 
-void	*check_death(void *src);
-void	doctor(t_data *data);
+int		doctor(t_philo *philo);
 
 // rutine
 void	*rutine(void *src);

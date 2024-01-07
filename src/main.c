@@ -6,7 +6,7 @@
 /*   By: abarrio- <abarrio-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 11:07:37 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/01/06 22:01:19 by abarrio-         ###   ########.fr       */
+/*   Updated: 2024/01/07 15:16:38 by abarrio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int	main(int argc, char *argv[])
 
 	// atexit(leaks);
 	init_data(&data, argc, argv);
-	pthread_mutex_init(&data.mutex, NULL);
 	i = 0;
 	if (data.error == 1)
 	{
@@ -34,8 +33,6 @@ int	main(int argc, char *argv[])
 	// no hay que empezar a ejecutar el programa hasta qe todos los hilos se han creado
 	// un mutex para que cuando un philo escriba no puedan escribir el resto
 	// tener en cuenta
-	pthread_mutex_init(&data.print, NULL);
-	doctor(&data);
 	while (i < data.nb_philo)
 	{
 		data.philo[i].data = &data;
@@ -59,7 +56,14 @@ int	main(int argc, char *argv[])
 		i++;
 		printf("Termino el %ld philosofo\n", i);
 	}
+	// liberar toda la memria y destruir todos los mutex
 	pthread_mutex_destroy(&data.mutex);
 	pthread_mutex_destroy(&data.print);
+	pthread_mutex_destroy(&data.doctor);
+	while (i < data.nb_philo)
+	{
+		pthread_mutex_destroy(&data.forks[i]);
+		i++;
+	}
 	return (0);
 }

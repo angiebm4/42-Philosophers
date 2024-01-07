@@ -6,7 +6,7 @@
 /*   By: abarrio- <abarrio-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 12:02:04 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/01/06 21:40:12 by abarrio-         ###   ########.fr       */
+/*   Updated: 2024/01/07 14:58:28 by abarrio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ size_t	philo_atoi(char *str, t_data *data)
 		data->error = ERROR_INVALID_ARGS;
 		i++;
 	}
+	if (nb > INT_MAX)
+		data->error = ERROR_INVALID_ARGS;
 	return (nb);
 }
 
@@ -52,5 +54,8 @@ size_t	get_time(void)
 	return(time_ms);
 }
 
-
+// void	ft_end_program()
+// {
+	
+// }
 
