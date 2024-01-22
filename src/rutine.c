@@ -5,68 +5,74 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: abarrio- <abarrio-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/06 19:15:59 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/01/07 17:56:54 by abarrio-         ###   ########.fr       */
+/*   Created: 2024/01/15 16:05:27 by abarrio-          #+#    #+#             */
+/*   Updated: 2024/01/22 10:08:31 by abarrio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-int	ft_eat(t_philo *philo)
+void	choose_fork(t_philo *philo)
 {
-	// print_state(philo, THINKING); como esperar a que se desbloqueen los mutex ¿?¿
-	if (doctor(philo) == 1)
-		return (1);
-	pthread_mutex_lock(philo->left_fork);
-	print_state(philo, TAKING_A_FORK_L);
-	if (doctor(philo) == 1)
-		return (1);
-	pthread_mutex_lock(philo->rigth_fork);
-	print_state(philo, TAKING_A_FORK_R);
-	if (doctor(philo) == 1)
-		return (1);
-	if ((get_time() - philo->last_time_eat) < philo->data->time_die)
-		philo->data->philo_death = 1;
-	print_state(philo, EATING);
-	usleep(philo->data->time_eat * 1000);
-	philo->last_time_eat = philo->data->start_time - get_time();
-	philo->times_eat += 1;
-	if (doctor(philo) == 1)
-		return (1);
-	// if ((philo->data->times_must_eat > 0) && philo->times_eat == (size_t)philo->data->times_must_eat)
-	// 	philo->data->all_satisfied += 1;
-	// if (philo->data->time_die < philo->last_time_eat)
-	// 	philo->data->philo_death = 1;
-	printf("filo %zu --- dejo de usar el tenedor left\n", philo->who);
-	pthread_mutex_unlock(philo->left_fork);
-	printf("filo %zu --- dejo de usar el tenedor rigth\n", philo->who);
-	pthread_mutex_unlock(philo->rigth_fork);
-	if (doctor(philo) == 1)
-		return (1);
-	return (0);
+	if(philo->who % 2 == 0)
+	{
+		pthread_mutex_lock(philo->rigth_fork);
+		print_state(philo, TAKING_A_FORK_R);
+		pthread_mutex_lock(philo->left_fork);
+		print_state(philo, TAKING_A_FORK_L);
+	}
+	else
+	{
+		pthread_mutex_lock(philo->left_fork);
+		print_state(philo, TAKING_A_FORK_L);
+		pthread_mutex_lock(philo->rigth_fork);
+		print_state(philo, TAKING_A_FORK_R);
+	}
 }
-
-int	ft_sleep(t_philo *philo)
+void	ft_eat(t_philo *philo)
 {
-	if (doctor(philo) == 1)
-		return (1);
-	print_state(philo, SLEEPING);
-	usleep(philo->data->time_sleep * 1000);
-	if (doctor(philo) == 1)
-		return (1);
-	return (0);
+	while (philo->data->end_program == 0)
+	{
+		printf("paso por aqui %zu\n", philo->who);
+		choose_fork(philo);
+		if ((get_time() - philo->last_time_eat) > philo->data->time_die)
+		{
+			print_state(philo, DEATH);
+			//pthread_mutex_lock(&philo->data->print);
+			philo->data->philo_death = 1;
+			printf("%d\n", philo->data->end_program);
+			break ;
+		}
+		print_state(philo, EATING);
+		usleep(philo->data->time_eat * 1000);
+		philo->last_time_eat = philo->data->start_time - get_time();
+		philo->times_eat += 1;
+		pthread_mutex_unlock(philo->left_fork);
+		pthread_mutex_unlock(philo->rigth_fork);
+		if (philo->times_eat == philo->data->times_must_eat)
+		{
+			pthread_mutex_lock(&philo->data->print);
+			philo->data->all_satisfied += 1;
+			break ;
+		}
+		print_state(philo, SLEEPING);
+		usleep(philo->data->time_sleep * 1000);
+		print_state(philo, THINKING);
+	}
+	return ;
 }
-
 
 void	*rutine(void *src)
 {
 	t_philo	*philo;
 
-	philo = src;
+	// return (NULL);
+	philo = (t_philo*)src;
 	while (philo->data->init_program == 1)
-		usleep(1000);
-	if (philo->data->nb_philo <= 1)
+		usleep(10);
+	if (philo->data->nb_philo == 1)
 	{
+		usleep(philo->data->time_die);
 		print_state(philo, DEATH);
 		printf(CYAN"loneliness is not the best buddy for philosophers\n"CLEAR);
 		return (NULL); // se tiene que morir??
@@ -76,13 +82,8 @@ void	*rutine(void *src)
 		printf(GREENFOSFI"bro bro let us eattt fuuckkk!!?¿¿¿¡¡¡!\n"CLEAR);
 		return (NULL);
 	}
-	while(1)
-	{
-		if (ft_eat(philo) == 1)
-			return (NULL);
-		if (ft_sleep(philo) == 1)
-			return (NULL);
-		print_state(philo, THINKING);
-	}
+	ft_eat(philo);
+	printf("2 --- paso por aqui %zu\n", philo->who);
+	// hasta aqui esta bien tengo que gestionar el doctor y demas algo no va bien
 	return (NULL);
 }

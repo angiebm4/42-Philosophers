@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: abarrio- <abarrio-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/04 12:02:04 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/01/07 18:06:36 by abarrio-         ###   ########.fr       */
+/*   Created: 2024/01/15 14:26:59 by abarrio-          #+#    #+#             */
+/*   Updated: 2024/01/22 10:04:07 by abarrio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,50 @@ size_t	philo_atoi(char *str, t_data *data)
 	return (nb);
 }
 
+void	clean_trash(t_data *data)
+{
+	size_t	i;
+
+	i = 0;
+	while (data->forks && i < data->nb_philo)
+	{
+		pthread_mutex_destroy(&data->forks[i]);
+		i++;
+	}
+	if (data->forks)
+		free(data->forks);
+	pthread_mutex_destroy(&data->print);
+	if (data->philo)
+		free(data->philo);
+	if (data)
+		free(data);
+}
+
+int	print_error(t_data *data)
+{
+	if (data->error == ERROR_INVALID_ARGS)
+	{
+		printf("%sINVALID ARGS%s\n", ORANGE, CLEAR);
+		printf("%sPlease follow the followig format:%s\n", ORANGE, CLEAR);
+		printf("./philo number_of_philosophers time_to_die time_to_eat ");
+		printf("time_to_sleep [number_of_times_each_philosopher_must_eat]\n");
+		printf("%s---> Only positive numbers are allowed%s\n", ORANGE, CLEAR);
+		printf("%s---> Range of numbers go of 0 to INT_MAX%s\n", ORANGE, CLEAR);
+		printf("%s---> Time is measured in milliseconds%s\n", ORANGE, CLEAR);
+		printf("%s---> The last argument is optional%s\n", ORANGE, CLEAR);
+	}
+	else if (data->error == ERROR_MALLOC)
+		printf("%sMEMORY ERROR%s\n", ORANGE, CLEAR);
+	else if (data->error == ERROR_MUTEX)
+		printf("%sMUTEX INIT ERROR%s\n", ORANGE, CLEAR);
+	else if (data->error == ERROR_CREATE_THREAD)
+		printf("%sMUTEX INIT ERROR%s\n", ORANGE, CLEAR);
+	else if (data->error == ERROR_JOIN_THREAD)
+		printf("%sMUTEX INIT ERROR%s\n", ORANGE, CLEAR);
+	clean_trash(data);
+	return (1);
+}
+
 size_t	get_time(void)
 {
 	struct timeval t_time;
@@ -54,24 +98,31 @@ size_t	get_time(void)
 	return(time_ms);
 }
 
-void	ft_clean_trash(t_data *data)
+void	print_state(t_philo *philo, int state)
 {
-	size_t	i;
+	size_t	ms;
 
-	i = 0;
-	pthread_mutex_destroy(&data->mutex);
-	pthread_mutex_destroy(&data->print);
-	pthread_mutex_destroy(&data->doctor);
-	while (i < data->nb_philo)
+	ms = get_time() - philo->data->start_time;
+	/*if (philo->data->end_program == 1)
+		return ;*/
+	pthread_mutex_lock(&philo->data->print);
+	if (philo->data->end_program == 1)
 	{
-		pthread_mutex_destroy(&data->forks[i]);
-		free(data->philo);
-		i++;
+		pthread_mutex_unlock(&philo->data->print);
+		return ;
 	}
+	if (state == TAKING_A_FORK_L)
+		printf("%s%zu ms %zu has taken his left fork\n%s", GREEN, ms, philo->who, CLEAR);
+	if (state == TAKING_A_FORK_R)
+		printf("%s%zu ms %zu has taken his rigth fork\n%s", GREEN, ms, philo->who, CLEAR);
+	if (state == THINKING)
+		printf("%s%zu ms %zu is thinking\n%s", YELLOW, ms, philo->who, CLEAR);
+	if (state == EATING)
+		printf("%s%zu ms %zu is eating\n%s", ORANGE, ms, philo->who, CLEAR);
+	if (state == SLEEPING)
+		printf("%s%zu ms %zu is sleeping\n%s", BLUE, ms, philo->who, CLEAR);
+	if (state == DEATH)
+		printf("%s%zu ms %zu died\n%s", RED, ms, philo->who, CLEAR);
+	pthread_mutex_unlock(&philo->data->print);
 }
-
-// void	ft_end_program()
-// {
-	
-// }
 
