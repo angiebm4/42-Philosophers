@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   doctor.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abarrio- <abarrio-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angela <angela@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:45:41 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/01/22 10:02:50 by abarrio-         ###   ########.fr       */
+/*   Updated: 2024/03/08 20:23:07 by angela           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
+/* TODO: esto esta mal se queda en buble por el doctorsito ademas de que no hay condicion para parar todos losfilos*/
 void	*doc_rutine(void *src)
 {
 	t_data	*data;
@@ -20,7 +21,7 @@ void	*doc_rutine(void *src)
 	while (1)
 	{
 		// printf("el doctor esta labuarando\n");
-		if (data->philo_death == 1 || data->all_satisfied == data->nb_philo)
+		if (data->philo_death == 1 || data->all_satisfied == data->info.nb_philo)
 		{
 			printf("el doctor detecto que te moriste\n");
 			pthread_mutex_lock(&data->print);

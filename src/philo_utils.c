@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abarrio- <abarrio-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angela <angela@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:26:59 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/01/22 10:04:07 by abarrio-         ###   ########.fr       */
+/*   Updated: 2024/03/08 14:27:59 by angela           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	clean_trash(t_data *data)
 	size_t	i;
 
 	i = 0;
-	while (data->forks && i < data->nb_philo)
+	while (data->forks && i < data->info.nb_philo)
 	{
 		pthread_mutex_destroy(&data->forks[i]);
 		i++;

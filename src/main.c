@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abarrio- <abarrio-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angela <angela@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:15:56 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/01/17 12:31:35 by abarrio-         ###   ########.fr       */
+/*   Updated: 2024/03/08 14:27:44 by angela           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,20 @@ void	print_struct(t_data *data)
 	i = 0;
 	printf(BLUE);
 	printf("----- DATA -----\n");
-	printf("nb_philo --- %zu\n", data->nb_philo);
-	printf("time_die --- %zu\n", data->time_die);
-	printf("time_eat --- %zu\n", data->time_eat);
-	printf("time_sleep --- %zu\n", data->time_sleep);
-	printf("times_must_eat --- %d\n", data->times_must_eat);
+	printf("nb_philo --- %zu\n", data->info.nb_philo);
+	printf("time_die --- %zu\n", data->info.time_die);
+	printf("time_eat --- %zu\n", data->info.time_eat);
+	printf("time_sleep --- %zu\n", data->info.time_sleep);
+	printf("times_must_eat --- %d\n", data->info.times_must_eat);
 	printf("flag error --- %d\n", data->error);
 	printf("start_time --- %zu\n", data->start_time);
 	printf("flag init_program --- %d\n", data->init_program);
 	printf(MAGENTA);
-	while (i < data->nb_philo)
+	while (i < data->info.nb_philo)
 	{
 		printf("----- DATA PHILO %lu -----\n", i + 1);
 		printf("who --- %zu\n", data->philo[i].who);
-		printf("thread_id --- %p\n", data->philo[i].thread_id);
+		printf("thread_id --- %ld\n", data->philo[i].thread_id);
 		printf("rigth_fork --- %p\n", data->philo[i].rigth_fork);
 		printf("left_fork --- %p\n", data->philo[i].left_fork);
 		i++;
@@ -63,7 +63,7 @@ int	main(int argc, char *argv[])
 	wait_threads(data);
 	if (data->error != 0)
 		return(print_error(data));
-	//final
+	/* END */
 	print_struct(data);
 	clean_trash(data);
 	return (0);
