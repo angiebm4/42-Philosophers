@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abarrio- <abarrio-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angela <angela@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 15:43:58 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/03/20 14:20:50 by abarrio-         ###   ########.fr       */
+/*   Updated: 2024/03/20 19:43:54 by angela           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	wait_threads(t_data *data)
 		// esperar a que acabe cada philosofo si uno muere todos acaban
 		return ;
 	}
+	printf("Termino el doctorsito\n");
 }
 
 void start_simulation(t_data *data)

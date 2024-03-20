@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   doctor.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abarrio- <abarrio-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angela <angela@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:45:41 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/03/20 14:05:17 by abarrio-         ###   ########.fr       */
+/*   Updated: 2024/03/20 19:45:47 by angela           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	*doc_rutine(void *src)
 		{
 			data->end_program = 1;
 			pthread_mutex_unlock(&data->mutex_manage);
-			break ;
+			return (NULL);
 		}
 		while(i < data->info.nb_philo)
 		{
@@ -36,6 +36,7 @@ void	*doc_rutine(void *src)
 			{
 				data->end_program = 1;
 				pthread_mutex_unlock(&data->mutex_manage);
+				pthread_mutex_unlock(&data->philo[i].mutex_philo);
 				return (NULL);
 			}
 			pthread_mutex_unlock(&data->philo[i].mutex_philo);

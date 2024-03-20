@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abarrio- <abarrio-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angela <angela@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:40:51 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/03/20 11:27:55 by abarrio-         ###   ########.fr       */
+/*   Updated: 2024/03/20 19:27:39 by angela           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ void	init_philo(t_data *data)
 	while (i < data->info.nb_philo)
 	{
 		data->philo[i].who = i + 1;
+		if (pthread_mutex_init(&data->philo[i].mutex_philo, NULL) == -1)
+			data->error = ERROR_MUTEX;
 		i++;
 	}
 	assign_forks(data);
