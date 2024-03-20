@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abarrio- <abarrio-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angela <angela@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:26:59 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/03/20 10:35:30 by abarrio-         ###   ########.fr       */
+/*   Updated: 2024/03/20 20:03:43 by angela           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,9 @@ int	print_error(t_data *data)
 	else if (data->error == ERROR_MUTEX)
 		printf("%sMUTEX INIT ERROR%s\n", ORANGE, CLEAR);
 	else if (data->error == ERROR_CREATE_THREAD)
-		printf("%sMUTEX INIT ERROR%s\n", ORANGE, CLEAR);
+		printf("%sCREATE THREAD ERROR%s\n", ORANGE, CLEAR);
 	else if (data->error == ERROR_JOIN_THREAD)
-		printf("%sMUTEX INIT ERROR%s\n", ORANGE, CLEAR);
+		printf("%sJOIN THREAD ERROR%s\n", ORANGE, CLEAR);
 	clean_trash(data);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: angela <angela@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 16:05:27 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/03/20 19:21:38 by angela           ###   ########.fr       */
+/*   Updated: 2024/03/20 19:49:13 by angela           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,14 @@ void	ft_sleep(t_philo *philo)
 int	ft_eat(t_philo *philo)
 {
 	choose_fork(philo);
-	if ((get_time() - philo->last_time_eat) > philo->data->info.time_die)
+	/*if ((get_time() - philo->last_time_eat) > philo->data->info.time_die)
 	{
 		pthread_mutex_lock(&philo->mutex_philo);
 		print_state(philo, DEATH);
 		philo->die = 1;
 		pthread_mutex_unlock(&philo->mutex_philo);
 		return (1);
-	}
+	}*/
 	print_state(philo, EATING);
 	usleep(philo->data->info.time_eat * 1000);
 	philo->last_time_eat = get_time();
