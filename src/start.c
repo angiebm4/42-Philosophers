@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angela <angela@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abarrio- <abarrio-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 15:43:58 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/03/08 14:30:37 by angela           ###   ########.fr       */
+/*   Updated: 2024/03/20 14:20:50 by abarrio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ void start_simulation(t_data *data)
 	size_t	i;
 
 	i = 0;
-	if (doctor(data) == 1)
-		return ;
+	// if (doctor(data) == 1)
+	// 	return ;
 	while (i < data->info.nb_philo)
 	{
 		data->philo[i].data = data;

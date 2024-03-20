@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   doctor.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angela <angela@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abarrio- <abarrio-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:45:41 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/03/08 20:23:07 by angela           ###   ########.fr       */
+/*   Updated: 2024/03/20 14:05:17 by abarrio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,30 @@
 void	*doc_rutine(void *src)
 {
 	t_data	*data;
+	size_t		i;
 
 	data = (t_data*)src;
 	while (1)
 	{
-		// printf("el doctor esta labuarando\n");
-		if (data->philo_death == 1 || data->all_satisfied == data->info.nb_philo)
+		pthread_mutex_lock(&data->mutex_manage);
+		i = 0;
+		if (data->all_satisfied == data->info.nb_philo)
 		{
-			printf("el doctor detecto que te moriste\n");
-			pthread_mutex_lock(&data->print);
 			data->end_program = 1;
-			pthread_mutex_unlock(&data->print);
+			pthread_mutex_unlock(&data->mutex_manage);
 			break ;
+		}
+		while(i < data->info.nb_philo)
+		{
+			pthread_mutex_lock(&data->philo[i].mutex_philo);
+			if (data->philo[i].die == 1)
+			{
+				data->end_program = 1;
+				pthread_mutex_unlock(&data->mutex_manage);
+				return (NULL);
+			}
+			pthread_mutex_unlock(&data->philo[i].mutex_philo);
+			i++;
 		}
 	}
 	return (NULL);

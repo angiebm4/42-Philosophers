@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angela <angela@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abarrio- <abarrio-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:16:02 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/03/08 14:25:48 by angela           ###   ########.fr       */
+/*   Updated: 2024/03/20 11:27:21 by abarrio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ struct					s_data
 	
 	/* INFO */
 	t_info				info;
-	pthread_mutex_t		mutex_info;
 	
 	/* FLAG ERROR */ /* SI DA ERROR ACABAR */
 	int					error;
@@ -69,6 +68,7 @@ struct					s_data
 	size_t				start_time;
 	int					init_program;
 	int					end_program;
+	pthread_mutex_t		mutex_manage;
 	
 	/* END FLAG */
 	int					philo_death; // 1 si 0 no
@@ -82,6 +82,12 @@ struct					s_philo
 	
 	/* ID THREAD */
 	pthread_t			thread_id;
+	
+	/* MUTEX TO CONTROL PHILO INFO */
+	pthread_mutex_t		mutex_philo;
+	
+	/* IM DIE */
+	size_t				die;
 	
 	/* NB OF PHILO */
 	size_t				who;

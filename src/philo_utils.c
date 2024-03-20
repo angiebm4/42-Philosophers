@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angela <angela@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abarrio- <abarrio-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:26:59 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/03/08 14:27:59 by angela           ###   ########.fr       */
+/*   Updated: 2024/03/20 10:35:30 by abarrio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ int	print_error(t_data *data)
 	clean_trash(data);
 	return (1);
 }
+
+/* TODO: hacerme mi propia funcion usleep por que lo dice luis y luis es dios*/
 
 size_t	get_time(void)
 {

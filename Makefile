@@ -10,7 +10,7 @@ NAME =philo
 
 CC = gcc
 #CFLAGS =-Wall -Werror -Wextra -fsanitize=thread -g3 -pthread
-CFLAGS =-Wall -Werror -Wextra -g3 -pthread
+CFLAGS =-Wall -Werror -Wextra -g3 -pthread -fsanitize=address
 
 SRC =	main.c \
 		philo_utils.c \
@@ -26,7 +26,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@echo "$(PINK)Compiling the philo.$(CLEAR)"
-	$(CC) $(OBJ) -o $(NAME) -g3 -pthread
+	$(CC) $(OBJ) -o $(NAME) -g3 -pthread -fsanitize=address
 #	$(CC) $(OBJ) -o $(NAME) -fsanitize=thread -g3 -pthread
 	@echo "$(GREEN)[OK]\n$(CLEAR)$(GREEN)Success!$(CLEAR)\n"
 

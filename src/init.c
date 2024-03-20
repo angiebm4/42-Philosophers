@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angela <angela@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abarrio- <abarrio-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:40:51 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/03/08 14:28:22 by angela           ###   ########.fr       */
+/*   Updated: 2024/03/20 11:27:55 by abarrio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	mutex_init(t_data *data)
 {
 	if (pthread_mutex_init(&data->print, NULL) == -1)
 		data->error = ERROR_MUTEX;
-	if (pthread_mutex_init(&data->mutex_info, NULL) == -1)
+	if (pthread_mutex_init(&data->mutex_manage, NULL) == -1)
 		data->error = ERROR_MUTEX;
 	
 }
