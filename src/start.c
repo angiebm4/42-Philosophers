@@ -6,7 +6,7 @@
 /*   By: angela <angela@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 15:43:58 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/03/20 19:43:54 by angela           ###   ########.fr       */
+/*   Updated: 2024/03/24 12:24:50 by angela           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ void	wait_threads(t_data *data)
 		i++;
 		printf("Termino el %ld philosofo\n", i);
 	}
-	if (pthread_join(data->doctor, NULL) != 0)
+	/*if (pthread_join(data->doctor, NULL) != 0)
 	{
 		data->error = ERROR_JOIN_THREAD;
 		// esperar a que acabe cada philosofo si uno muere todos acaban
 		return ;
 	}
-	printf("Termino el doctorsito\n");
+	printf("Termino el doctorsito\n");*/
 }
 
 void start_simulation(t_data *data)
@@ -45,6 +45,7 @@ void start_simulation(t_data *data)
 	i = 0;
 	// if (doctor(data) == 1)
 	// 	return ;
+    doctor_manage(data);
 	while (i < data->info.nb_philo)
 	{
 		data->philo[i].data = data;
@@ -63,5 +64,10 @@ void start_simulation(t_data *data)
 		data->philo[i].last_time_eat = data->start_time;
 		i++;
 	}
+    pthread_mutex_lock(&data->print);
+    print_struct(data);
+    pthread_mutex_unlock(&data->print);
+    
 	data->init_program = 0;
+    
 }

@@ -6,7 +6,7 @@
 /*   By: angela <angela@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:26:59 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/03/20 20:03:43 by angela           ###   ########.fr       */
+/*   Updated: 2024/03/24 11:28:52 by angela           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,18 @@ size_t	philo_atoi(char *str, t_data *data)
 	return (nb);
 }
 
+size_t	get_time(void)
+{
+	struct timeval t_time;
+	size_t	time_ms;
+
+	gettimeofday(&t_time, NULL);
+	time_ms = (t_time.tv_sec * 1000) + (t_time.tv_usec / 1000);
+	return(time_ms);
+}
+
+
+
 void	clean_trash(t_data *data)
 {
 	size_t	i;
@@ -56,7 +68,7 @@ void	clean_trash(t_data *data)
 	}
 	if (data->forks)
 		free(data->forks);
-	pthread_mutex_destroy(&data->print);
+	// pthread_mutex_destroy(&data->print);
 	if (data->philo)
 		free(data->philo);
 	if (data)
@@ -88,43 +100,23 @@ int	print_error(t_data *data)
 	return (1);
 }
 
-/* TODO: hacerme mi propia funcion usleep por que lo dice luis y luis es dios*/
-
-size_t	get_time(void)
+uint64_t	time_get_msec(uint64_t start)
 {
-	struct timeval t_time;
-	size_t	time_ms;
+	uint64_t		ret;
+	struct timeval	time;
 
-	gettimeofday(&t_time, NULL);
-	time_ms = (t_time.tv_sec * 1000) + (t_time.tv_usec / 1000);
-	return(time_ms);
+	gettimeofday(&time, NULL);
+	ret = time.tv_sec * 1000;
+	ret += time.tv_usec / 1000;
+	ret -= start;
+	return (ret);
 }
 
-void	print_state(t_philo *philo, int state)
+void	ft_usleep(uint64_t miliseconds)
 {
-	size_t	ms;
+	uint64_t	start;
 
-	ms = get_time() - philo->data->start_time;
-	/*if (philo->data->end_program == 1)
-		return ;*/
-	pthread_mutex_lock(&philo->data->print);
-	if (philo->data->end_program == 1)
-	{
-		pthread_mutex_unlock(&philo->data->print);
-		return ;
-	}
-	if (state == TAKING_A_FORK_L)
-		printf("%s%zu ms %zu has taken his left fork\n%s", GREEN, ms, philo->who, CLEAR);
-	if (state == TAKING_A_FORK_R)
-		printf("%s%zu ms %zu has taken his rigth fork\n%s", GREEN, ms, philo->who, CLEAR);
-	if (state == THINKING)
-		printf("%s%zu ms %zu is thinking\n%s", YELLOW, ms, philo->who, CLEAR);
-	if (state == EATING)
-		printf("%s%zu ms %zu is eating\n%s", ORANGE, ms, philo->who, CLEAR);
-	if (state == SLEEPING)
-		printf("%s%zu ms %zu is sleeping\n%s", BLUE, ms, philo->who, CLEAR);
-	if (state == DEATH)
-		printf("%s%zu ms %zu died\n%s", RED, ms, philo->who, CLEAR);
-	pthread_mutex_unlock(&philo->data->print);
+	start = time_get_msec(0);
+	while (time_get_msec(start) < miliseconds)
+		usleep(1);
 }
-

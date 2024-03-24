@@ -6,7 +6,7 @@
 /*   By: angela <angela@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:40:51 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/03/20 19:27:39 by angela           ###   ########.fr       */
+/*   Updated: 2024/03/24 11:52:48 by angela           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ void	init_philo(t_data *data)
 	while (i < data->info.nb_philo)
 	{
 		data->philo[i].who = i + 1;
-		if (pthread_mutex_init(&data->philo[i].mutex_philo, NULL) == -1)
-			data->error = ERROR_MUTEX;
+		/*if (pthread_mutex_init(&data->philo[i].mutex_philo, NULL) == -1)
+			data->error = ERROR_MUTEX;*/
 		i++;
 	}
 	assign_forks(data);
@@ -72,7 +72,7 @@ void	init_data(t_data *data, int argc, char *argv[])
 	}
 	mutex_init(data);
 	data->init_program = 1;
-	data->philo_death = 0;
+	//data->philo_death = 0;
 	data->info.nb_philo = philo_atoi(argv[1], data);
 	data->info.time_die = philo_atoi(argv[2], data);
 	data->info.time_eat = philo_atoi(argv[3], data);

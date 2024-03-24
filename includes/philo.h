@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abarrio- <abarrio-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angela <angela@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:16:02 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/03/20 11:27:21 by abarrio-         ###   ########.fr       */
+/*   Updated: 2024/03/24 12:31:09 by angela           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,25 +54,22 @@ struct					s_data
 	
 	/* FLAG ERROR */ /* SI DA ERROR ACABAR */
 	int					error;
+
+	/* PRINT MANAGE MUTEX */
+	pthread_mutex_t		print;
+
+	/* DOCTOR */
+	pthread_t			doctor;
+
+	/* TIME MANAGE */
+	size_t				start_time;
+	int					init_program;
 	
 	/* FORKS */
 	pthread_mutex_t		*forks;
 
-	/* PRINT MANAGE MUTEX */
-	pthread_mutex_t		print;
-	
-	/* DOCTOR */
-	pthread_t			doctor;
-	
-	/* TIME MANAGE */
-	size_t				start_time;
-	int					init_program;
-	int					end_program;
 	pthread_mutex_t		mutex_manage;
-	
-	/* END FLAG */
-	int					philo_death; // 1 si 0 no
-	size_t				all_satisfied;
+	int					end_program;
 };
 
 struct					s_philo
@@ -82,13 +79,7 @@ struct					s_philo
 	
 	/* ID THREAD */
 	pthread_t			thread_id;
-	
-	/* MUTEX TO CONTROL PHILO INFO */
-	pthread_mutex_t		mutex_philo;
-	
-	/* IM DIE */
-	size_t				die;
-	
+
 	/* NB OF PHILO */
 	size_t				who;
 
@@ -101,29 +92,28 @@ struct					s_philo
 	pthread_mutex_t		*left_fork;
 };
 
-/* UTILS */
-size_t	philo_atoi(char *str, t_data *data);
-int		print_error(t_data *data);
-void	print_state(t_philo *philo, int state);
-void	clean_trash(t_data *data);
-size_t	get_time(void);
+/* DEBUGGING: DELETE */
+void	print_struct(t_data *data);
+void	print_philo_data(t_philo *philo);
 
 /* INIT STRUCT */
 void	init_data(t_data *data, int argc, char *argv[]);
-void	init_philo(t_data *data);
+
+/* UTILS */
+size_t	philo_atoi(char *str, t_data *data);
+int		print_error(t_data *data);
+void	clean_trash(t_data *data);
+size_t	get_time(void);
+void	ft_usleep(size_t time);
+
+/* PHILOS RUTINE */
+void	*rutine(void *src);
 
 /* START SIMULATION */
 void 	start_simulation(t_data *data);
 void	wait_threads(t_data *data);
 
-/* PHILOS RUTINE */
-void	*rutine(void *src);
-
-/* DEBUGGING: DELETE */
-void	print_struct(t_data *data);
-
-/* DOCTOR */
-int	doctor(t_data *data);
-void	*doc_rutine(void *src);
+/* DOCTOR MANAGE */
+int	doctor_manage(t_data *data);
 
 #endif

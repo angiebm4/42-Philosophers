@@ -13,10 +13,10 @@ CC = gcc
 CFLAGS =-Wall -Werror -Wextra -g3 -pthread -fsanitize=address
 
 SRC =	main.c \
-		philo_utils.c \
 		init.c \
-		rutine.c \
+		philo_utils.c \
 		start.c \
+		rutine.c \
 		doctor.c
 
 OBJ_DIR = obj/
