@@ -6,7 +6,7 @@
 /*   By: angela <angela@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:16:02 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/03/24 12:31:09 by angela           ###   ########.fr       */
+/*   Updated: 2024/03/24 18:14:17 by angela           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ struct					s_data
 	/* TIME MANAGE */
 	size_t				start_time;
 	int					init_program;
+	pthread_mutex_t		start_mutex;
 	
 	/* FORKS */
 	pthread_mutex_t		*forks;

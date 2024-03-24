@@ -6,7 +6,7 @@
 /*   By: angela <angela@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:40:51 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/03/24 11:52:48 by angela           ###   ########.fr       */
+/*   Updated: 2024/03/24 18:36:46 by angela           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,12 @@ void	init_philo(t_data *data)
 		data->error = ERROR_MALLOC;
 		return ;
 	}
-	memset(data->philo, 0, (sizeof(t_philo)));
+	memset(data->philo, 0, (sizeof(t_philo)) * data->info.nb_philo);
 	i = 0;
 	while (i < data->info.nb_philo)
 	{
 		data->philo[i].who = i + 1;
+        
 		/*if (pthread_mutex_init(&data->philo[i].mutex_philo, NULL) == -1)
 			data->error = ERROR_MUTEX;*/
 		i++;
@@ -58,6 +59,8 @@ void	mutex_init(t_data *data)
 	if (pthread_mutex_init(&data->print, NULL) == -1)
 		data->error = ERROR_MUTEX;
 	if (pthread_mutex_init(&data->mutex_manage, NULL) == -1)
+		data->error = ERROR_MUTEX;
+    if (pthread_mutex_init(&data->start_mutex, NULL) == -1)
 		data->error = ERROR_MUTEX;
 	
 }

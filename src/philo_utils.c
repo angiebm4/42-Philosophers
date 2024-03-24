@@ -6,7 +6,7 @@
 /*   By: angela <angela@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:26:59 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/03/24 11:28:52 by angela           ###   ########.fr       */
+/*   Updated: 2024/03/24 18:26:24 by angela           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	clean_trash(t_data *data)
 	}
 	if (data->forks)
 		free(data->forks);
-	// pthread_mutex_destroy(&data->print);
+	pthread_mutex_destroy(&data->print);
 	if (data->philo)
 		free(data->philo);
 	if (data)

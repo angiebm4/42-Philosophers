@@ -6,7 +6,7 @@
 /*   By: angela <angela@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 16:05:27 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/03/24 12:31:00 by angela           ###   ########.fr       */
+/*   Updated: 2024/03/24 18:48:17 by angela           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,21 @@ void	*rutine(void *src)
     pthread_mutex_lock(&philo->data->print);
     print_philo_data(philo);
     pthread_mutex_unlock(&philo->data->print);
-    while (philo->data->init_program == 1)
-		ft_usleep(1);
+    
+    while (1)
+    {
+        pthread_mutex_lock(&philo->data->start_mutex);
+        if (philo->data->init_program == 0)
+        {
+            pthread_mutex_unlock(&philo->data->start_mutex);
+            break;
+        }
+        pthread_mutex_unlock(&philo->data->start_mutex);
+    }
+    
     pthread_mutex_lock(&philo->data->print);
     printf("estoy preparado para comenzar %ld\n", philo->who);
+    ft_usleep(10);
     pthread_mutex_unlock(&philo->data->print);
     while(1)
     {
@@ -36,6 +47,7 @@ void	*rutine(void *src)
             pthread_mutex_lock(&philo->data->print);
             printf("%s ME OBLIGARON A TERMINAR %ld\n%s", RED, philo->who, CLEAR);
             pthread_mutex_unlock(&philo->data->print);
+            pthread_mutex_unlock(&philo->data->mutex_manage);
             return (NULL);
         }
         pthread_mutex_unlock(&philo->data->mutex_manage);
