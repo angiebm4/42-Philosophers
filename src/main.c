@@ -6,7 +6,7 @@
 /*   By: angela <angela@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:15:56 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/03/25 12:31:31 by angela           ###   ########.fr       */
+/*   Updated: 2024/03/25 12:42:16 by angela           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,6 @@ int	main(int argc, char *argv[])
 	wait_threads(data);
 	if (data->error != 0)
 		return(print_error(data));
-	clean_trash(data);
+	clean_trash(data); /* TODO: liberar y destruir mutex que no esta todo lo que meti de nuevas */
 	return (0);
 }
