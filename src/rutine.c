@@ -6,7 +6,7 @@
 /*   By: angela <angela@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 16:05:27 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/03/25 12:41:30 by angela           ###   ########.fr       */
+/*   Updated: 2024/03/25 16:42:37 by angela           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,12 @@ int	ft_eat(t_philo *philo)
 {
 	choose_fork(philo);
 	print_state(philo, EATING);
+	if ((get_time() - philo->last_time_eat) > philo->data->info.time_die)
+	{
+		pthread_mutex_unlock(philo->left_fork);
+		pthread_mutex_unlock(philo->rigth_fork);
+		return (1);
+	}
 	philo->last_time_eat = get_time();
 	ft_usleep(philo->data->info.time_eat);
 	philo->times_eat += 1;
@@ -85,7 +91,16 @@ int	rutine_manage(t_philo *philo)
 	while(1)
 	{
 		if (end_pthread(philo) == 0)
-            ft_eat(philo);
+		{
+			if (ft_eat(philo) == 1)
+			{
+				print_state(philo, DEATH);
+        		pthread_mutex_lock(&philo->philo_manage);
+				philo->die = 1;
+        		pthread_mutex_unlock(&philo->philo_manage);
+				return (1);
+			}
+		}	
 		else
 			return (1);	
 		if (end_pthread(philo) == 0)

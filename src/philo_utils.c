@@ -6,7 +6,7 @@
 /*   By: angela <angela@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:26:59 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/03/25 00:45:19 by angela           ###   ########.fr       */
+/*   Updated: 2024/03/25 12:52:40 by angela           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 size_t	philo_atoi(char *str, t_data *data)
 {
-	// los numeros muy grandes no los gestionas pon un limite a algun numero
+	/* TODO: los numeros muy grandes no los gestionas pon un limite a algun numero*/ 
 	int		i;
 	size_t	nb;
 
