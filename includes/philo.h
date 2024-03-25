@@ -6,7 +6,7 @@
 /*   By: angela <angela@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:16:02 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/03/24 18:14:17 by angela           ###   ########.fr       */
+/*   Updated: 2024/03/25 12:15:45 by angela           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,16 @@ struct					s_philo
 	/* NB OF PHILO */
 	size_t				who;
 
+	/* END FLAGS DOCTORSITO */
+	int					die;
+	pthread_mutex_t		philo_manage;
+	int					satisfied;
+	int					flag;
+	
 	/* EAT STATS */
 	size_t				last_time_eat;
 	int					times_eat;
-
+	
 	/* FORKS */
 	pthread_mutex_t		*rigth_fork;
 	pthread_mutex_t		*left_fork;
@@ -105,7 +111,8 @@ size_t	philo_atoi(char *str, t_data *data);
 int		print_error(t_data *data);
 void	clean_trash(t_data *data);
 size_t	get_time(void);
-void	ft_usleep(size_t time);
+void	ft_usleep(uint64_t miliseconds);
+void	print_state(t_philo *philo, int state);
 
 /* PHILOS RUTINE */
 void	*rutine(void *src);

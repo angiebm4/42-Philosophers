@@ -6,7 +6,7 @@
 /*   By: angela <angela@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:26:59 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/03/24 18:26:24 by angela           ###   ########.fr       */
+/*   Updated: 2024/03/25 00:45:19 by angela           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,6 @@ size_t	get_time(void)
 	return(time_ms);
 }
 
-
-
 void	clean_trash(t_data *data)
 {
 	size_t	i;
@@ -69,6 +67,8 @@ void	clean_trash(t_data *data)
 	if (data->forks)
 		free(data->forks);
 	pthread_mutex_destroy(&data->print);
+	pthread_mutex_destroy(&data->start_mutex);
+	pthread_mutex_destroy(&data->mutex_manage);
 	if (data->philo)
 		free(data->philo);
 	if (data)
@@ -119,4 +119,31 @@ void	ft_usleep(uint64_t miliseconds)
 	start = time_get_msec(0);
 	while (time_get_msec(start) < miliseconds)
 		usleep(1);
+}
+
+
+void	print_state(t_philo *philo, int state)
+{
+	size_t	ms;
+
+	ms = get_time() - philo->data->start_time;
+	pthread_mutex_lock(&philo->data->print);
+	if (philo->data->end_program == 1)
+	{
+		pthread_mutex_unlock(&philo->data->print);
+		return ;
+	}
+	if (state == TAKING_A_FORK_L)
+		printf("%s%zu ms %zu has taken his left fork\n%s", GREEN, ms, philo->who, CLEAR);
+	if (state == TAKING_A_FORK_R)
+		printf("%s%zu ms %zu has taken his rigth fork\n%s", GREEN, ms, philo->who, CLEAR);
+	if (state == THINKING)
+		printf("%s%zu ms %zu is thinking\n%s", YELLOW, ms, philo->who, CLEAR);
+	if (state == EATING)
+		printf("%s%zu ms %zu is eating\n%s", ORANGE, ms, philo->who, CLEAR);
+	if (state == SLEEPING)
+		printf("%s%zu ms %zu is sleeping\n%s", BLUE, ms, philo->who, CLEAR);
+	if (state == DEATH)
+		printf("%s%zu ms %zu died\n%s", RED, ms, philo->who, CLEAR);
+	pthread_mutex_unlock(&philo->data->print);
 }

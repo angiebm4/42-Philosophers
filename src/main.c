@@ -6,7 +6,7 @@
 /*   By: angela <angela@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:15:56 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/03/24 12:30:49 by angela           ###   ########.fr       */
+/*   Updated: 2024/03/25 12:31:31 by angela           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,18 @@ void	print_struct(t_data *data)
 void	print_philo_data(t_philo *philo)
 {
 	printf(MAGENTA);
-	// printf("----- DATA PHILO -----\n");
+	printf("----- DATA PHILO -----\n");
 	printf("pointer to data struct --- %p\n", philo->data);
 	printf("thread id --- %zu\n", philo->thread_id);
 	printf("who --- %ld\n", philo->who);
+	printf("die --- %d\n", philo->die);
+	printf("satisfied --- %d\n", philo->satisfied);
 	printf("times eat --- %d\n", philo->times_eat);
 	printf("last time eat --- %ld\n", philo->last_time_eat);
 	printf("rigth fork --- %p\n", philo->rigth_fork);
 	printf("left fork --- %p\n", philo->left_fork);
+	printf(BLUE);
+	printf("%ld\n", get_time());
 	printf(CLEAR);
 }
 
@@ -67,17 +71,14 @@ int	main(int argc, char *argv[])
 	if (!data)
 		return (0);
 	init_data(data, argc, argv);
-	print_struct(data);
+	if (data->error != 0)
+		return(print_error(data));
 	start_simulation(data);
+	if (data->error != 0)
+		return(print_error(data));
 	wait_threads(data);
-	/*size_t i = 0;
-	while (i < data->info.nb_philo)
-	{
-		printf("----- DATA PHILO %lu -----\n", i + 1);
-		print_philo_data(&data->philo[i]);
-		i++;
-	}*/
-	print_struct(data);
+	if (data->error != 0)
+		return(print_error(data));
 	clean_trash(data);
 	return (0);
 }

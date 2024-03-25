@@ -6,7 +6,7 @@
 /*   By: angela <angela@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 15:43:58 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/03/24 18:45:03 by angela           ###   ########.fr       */
+/*   Updated: 2024/03/25 12:32:25 by angela           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,14 @@ void	wait_threads(t_data *data)
 			return ;
 		}
 		i++;
-		printf("Termino el %ld philosofo\n", i);
+		// printf("Termino el %ld philosofo\n", i);
 	}
 	if (pthread_join(data->doctor, NULL) != 0)
 	{
 		data->error = ERROR_JOIN_THREAD;
-		// esperar a que acabe cada philosofo si uno muere todos acaban
 		return ;
 	}
-	printf("Termino el doctorsito\n");
+	// printf("Termino el doctorsito\n");
 }
 
 void start_simulation(t_data *data)
@@ -43,9 +42,8 @@ void start_simulation(t_data *data)
 	size_t	i;
 
 	i = 0;
-	// if (doctor(data) == 1)
-	// 	return ;
-    doctor_manage(data);
+	if (doctor_manage(data) == 1)
+		return ;
 	while (i < data->info.nb_philo)
 	{
 		data->philo[i].data = data;
@@ -55,8 +53,9 @@ void start_simulation(t_data *data)
 			return ;
 		}
 		i++;
-		printf("Comenzo el %ld philosofo\n", i);
+		// printf("Comenzo el %ld philosofo\n", i);
 	}
+	
 	data->start_time = get_time();
 	i = 0;
 	while (i < data->info.nb_philo)
@@ -64,9 +63,6 @@ void start_simulation(t_data *data)
 		data->philo[i].last_time_eat = data->start_time;
 		i++;
 	}
-    /*pthread_mutex_lock(&data->print);
-    print_struct(data);
-    pthread_mutex_unlock(&data->print);*/
     
     pthread_mutex_lock(&data->start_mutex);
 	data->init_program = 0;

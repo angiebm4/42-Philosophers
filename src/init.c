@@ -6,7 +6,7 @@
 /*   By: angela <angela@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:40:51 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/03/24 18:36:46 by angela           ###   ########.fr       */
+/*   Updated: 2024/03/25 00:59:23 by angela           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ void	init_philo(t_data *data)
 	{
 		data->philo[i].who = i + 1;
         
-		/*if (pthread_mutex_init(&data->philo[i].mutex_philo, NULL) == -1)
-			data->error = ERROR_MUTEX;*/
+		if (pthread_mutex_init(&data->philo[i].philo_manage, NULL) == -1)
+			data->error = ERROR_MUTEX;
 		i++;
 	}
 	assign_forks(data);
