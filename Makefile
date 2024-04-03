@@ -17,7 +17,9 @@ SRC =	main.c \
 		philo_utils.c \
 		start.c \
 		rutine.c \
-		doctor.c
+		doctor.c \
+		rutine_habits.c \
+		time.c
 
 OBJ_DIR = obj/
 OBJ = $(SRC:%.c=$(OBJ_DIR)%.o)

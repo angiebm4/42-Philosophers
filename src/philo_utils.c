@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angela <angela@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abarrio- <abarrio-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:26:59 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/03/25 12:52:40 by angela           ###   ########.fr       */
+/*   Updated: 2024/04/03 23:04:58 by abarrio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 size_t	philo_atoi(char *str, t_data *data)
 {
-	/* TODO: los numeros muy grandes no los gestionas pon un limite a algun numero*/ 
 	int		i;
 	size_t	nb;
 
@@ -35,23 +34,10 @@ size_t	philo_atoi(char *str, t_data *data)
 		i++;
 	}
 	if (str[i] != '\0')
-	{
 		data->error = ERROR_INVALID_ARGS;
-		i++;
-	}
 	if (nb > INT_MAX)
 		data->error = ERROR_INVALID_ARGS;
 	return (nb);
-}
-
-size_t	get_time(void)
-{
-	struct timeval t_time;
-	size_t	time_ms;
-
-	gettimeofday(&t_time, NULL);
-	time_ms = (t_time.tv_sec * 1000) + (t_time.tv_usec / 1000);
-	return(time_ms);
 }
 
 void	clean_trash(t_data *data)
@@ -69,6 +55,12 @@ void	clean_trash(t_data *data)
 	pthread_mutex_destroy(&data->print);
 	pthread_mutex_destroy(&data->start_mutex);
 	pthread_mutex_destroy(&data->mutex_manage);
+	i = 0;
+	while (data->philo && i < data->info.nb_philo)
+	{
+		pthread_mutex_destroy(&data->philo[i].philo_manage);
+		i++;
+	}
 	if (data->philo)
 		free(data->philo);
 	if (data)
@@ -100,43 +92,14 @@ int	print_error(t_data *data)
 	return (1);
 }
 
-uint64_t	time_get_msec(uint64_t start)
+static void	print_state_2(t_philo *philo, int state, size_t ms)
 {
-	uint64_t		ret;
-	struct timeval	time;
-
-	gettimeofday(&time, NULL);
-	ret = time.tv_sec * 1000;
-	ret += time.tv_usec / 1000;
-	ret -= start;
-	return (ret);
-}
-
-void	ft_usleep(uint64_t miliseconds)
-{
-	uint64_t	start;
-
-	start = time_get_msec(0);
-	while (time_get_msec(start) < miliseconds)
-		usleep(1);
-}
-
-
-void	print_state(t_philo *philo, int state)
-{
-	size_t	ms;
-
-	ms = get_time() - philo->data->start_time;
-	pthread_mutex_lock(&philo->data->print);
-	if (philo->data->end_program == 1)
-	{
-		pthread_mutex_unlock(&philo->data->print);
-		return ;
-	}
 	if (state == TAKING_A_FORK_L)
-		printf("%s%zu ms %zu has taken his left fork\n%s", GREEN, ms, philo->who, CLEAR);
+		printf("%s%zu ms %zu has taken his left fork\n%s", GREEN, ms,
+			philo->who, CLEAR);
 	if (state == TAKING_A_FORK_R)
-		printf("%s%zu ms %zu has taken his rigth fork\n%s", GREEN, ms, philo->who, CLEAR);
+		printf("%s%zu ms %zu has taken his rigth fork\n%s", GREEN, ms,
+			philo->who, CLEAR);
 	if (state == THINKING)
 		printf("%s%zu ms %zu is thinking\n%s", YELLOW, ms, philo->who, CLEAR);
 	if (state == EATING)
@@ -145,5 +108,22 @@ void	print_state(t_philo *philo, int state)
 		printf("%s%zu ms %zu is sleeping\n%s", BLUE, ms, philo->who, CLEAR);
 	if (state == DEATH)
 		printf("%s%zu ms %zu died\n%s", RED, ms, philo->who, CLEAR);
+}
+
+void	print_state(t_philo *philo, int state)
+{
+	size_t	ms;
+
+	ms = get_time() - philo->data->start_time;
+	pthread_mutex_lock(&philo->data->print);
+	pthread_mutex_lock(&philo->data->mutex_manage);
+	if (philo->data->end_program == 1)
+	{
+		pthread_mutex_unlock(&philo->data->print);
+		pthread_mutex_unlock(&philo->data->mutex_manage);
+		return ;
+	}
+	pthread_mutex_unlock(&philo->data->mutex_manage);
+	print_state_2(philo, state, ms);
 	pthread_mutex_unlock(&philo->data->print);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angela <angela@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abarrio- <abarrio-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 15:43:58 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/03/25 12:53:17 by angela           ###   ########.fr       */
+/*   Updated: 2024/04/03 23:02:41 by abarrio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	wait_threads(t_data *data)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	while (i < data->info.nb_philo)
@@ -25,17 +25,15 @@ void	wait_threads(t_data *data)
 			return ;
 		}
 		i++;
-		// printf("Termino el %ld philosofo\n", i);
 	}
 	if (pthread_join(data->doctor, NULL) != 0)
 	{
 		data->error = ERROR_JOIN_THREAD;
 		return ;
 	}
-	// printf("Termino el doctorsito\n");
 }
 
-void start_simulation(t_data *data)
+void	start_simulation(t_data *data)
 {
 	size_t	i;
 
@@ -45,22 +43,19 @@ void start_simulation(t_data *data)
 	while (i < data->info.nb_philo)
 	{
 		data->philo[i].data = data;
-		if (pthread_create(&data->philo[i].thread_id, NULL, &rutine, &data->philo[i]) != 0)
+		if (pthread_create(&data->philo[i].thread_id, NULL, &rutine,
+				&data->philo[i]) != 0)
 		{
 			data->error = ERROR_CREATE_THREAD;
 			return ;
 		}
 		i++;
-		// printf("Comenzo el %ld philosofo\n", i);
 	}
 	data->start_time = get_time();
-	i = 0;
-	while (i < data->info.nb_philo)
-	{
+	i = -1;
+	while (++i < data->info.nb_philo)
 		data->philo[i].last_time_eat = data->start_time;
-		i++;
-	}
-    pthread_mutex_lock(&data->start_mutex);
+	pthread_mutex_lock(&data->start_mutex);
 	data->init_program = 0;
-    pthread_mutex_unlock(&data->start_mutex);
+	pthread_mutex_unlock(&data->start_mutex);
 }
