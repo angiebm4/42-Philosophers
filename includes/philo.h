@@ -6,7 +6,7 @@
 /*   By: abarrio- <abarrio-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:16:02 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/04/03 22:42:29 by abarrio-         ###   ########.fr       */
+/*   Updated: 2024/04/11 12:26:40 by abarrio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 typedef struct s_data	t_data;
 typedef struct s_philo	t_philo;
 typedef struct s_info	t_info;
+typedef struct s_fork	t_fork;
 
 struct					s_info
 {
@@ -67,10 +68,16 @@ struct					s_data
 	pthread_mutex_t		start_mutex;
 
 	/* FORKS */
-	pthread_mutex_t		*forks;
+	t_fork				*forks;
 
 	pthread_mutex_t		mutex_manage;
 	int					end_program;
+};
+
+struct					s_fork
+{
+	pthread_mutex_t		mutex_fork;
+	int					fork;
 };
 
 struct					s_philo
@@ -95,8 +102,8 @@ struct					s_philo
 	int					times_eat;
 
 	/* FORKS */
-	pthread_mutex_t		*rigth_fork;
-	pthread_mutex_t		*left_fork;
+	t_fork				*rigth_fork;
+	t_fork				*left_fork;
 };
 
 /* DEBUGGING: DELETE */
@@ -123,6 +130,7 @@ void					*rutine(void *src);
 int						ft_eat(t_philo *philo);
 void					ft_sleep(t_philo *philo);
 void					ft_thinking(t_philo *philo);
+int						is_death(t_philo *philo, int flag);
 
 /* START SIMULATION */
 void					start_simulation(t_data *data);

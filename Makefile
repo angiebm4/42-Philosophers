@@ -51,3 +51,16 @@ fclean: clean
 
 re: fclean all
 .PHONY: clean fclean re all
+
+
+t1:
+	./philo 5 800 200 200
+
+t2:
+	./philo 5 800 200 200 7
+
+t3:
+	./philo 4 410 200 200
+
+t4:
+	./philo 3 410 200 100 

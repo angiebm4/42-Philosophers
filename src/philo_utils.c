@@ -6,7 +6,7 @@
 /*   By: abarrio- <abarrio-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:26:59 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/04/03 23:04:58 by abarrio-         ###   ########.fr       */
+/*   Updated: 2024/04/11 11:49:19 by abarrio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	clean_trash(t_data *data)
 	i = 0;
 	while (data->forks && i < data->info.nb_philo)
 	{
-		pthread_mutex_destroy(&data->forks[i]);
+		pthread_mutex_destroy(&data->forks[i].mutex_fork);
 		i++;
 	}
 	if (data->forks)

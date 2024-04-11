@@ -6,7 +6,7 @@
 /*   By: abarrio- <abarrio-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:45:41 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/04/03 22:45:32 by abarrio-         ###   ########.fr       */
+/*   Updated: 2024/04/11 12:26:28 by abarrio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,10 @@ void	*someone_die(t_data *data, int i)
 	return (NULL);
 }
 
-void	*check_philo_stats(t_data *data)
+void	*check_philo_stats(t_data *data, size_t all_satis)
 {
 	size_t	i;
-	size_t	all_satis;
 
-	all_satis = 0;
 	while (1)
 	{
 		i = 0;
@@ -48,6 +46,8 @@ void	*check_philo_stats(t_data *data)
 		{
 			pthread_mutex_lock(&data->philo[i].philo_manage);
 			if (data->philo[i].die)
+				return (someone_die(data, i));
+			if (is_death(&data->philo[i], 1))
 				return (someone_die(data, i));
 			pthread_mutex_unlock(&data->philo[i].philo_manage);
 			pthread_mutex_lock(&data->philo[i].philo_manage);
@@ -79,7 +79,7 @@ void	*doc_rutine(void *src)
 		}
 		pthread_mutex_unlock(&data->start_mutex);
 	}
-	return (check_philo_stats(data));
+	return (check_philo_stats(data, 0));
 }
 
 int	doctor_manage(t_data *data)
