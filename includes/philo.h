@@ -6,7 +6,7 @@
 /*   By: abarrio- <abarrio-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:16:02 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/04/11 12:26:40 by abarrio-         ###   ########.fr       */
+/*   Updated: 2024/04/15 20:52:21 by abarrio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,10 +105,6 @@ struct					s_philo
 	t_fork				*rigth_fork;
 	t_fork				*left_fork;
 };
-
-/* DEBUGGING: DELETE */
-void					print_struct(t_data *data);
-void					print_philo_data(t_philo *philo);
 
 /* INIT STRUCT */
 void					init_data(t_data *data, int argc, char *argv[]);

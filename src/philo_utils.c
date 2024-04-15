@@ -6,7 +6,7 @@
 /*   By: abarrio- <abarrio-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:26:59 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/04/11 11:49:19 by abarrio-         ###   ########.fr       */
+/*   Updated: 2024/04/16 00:07:42 by abarrio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,6 @@ void	print_state(t_philo *philo, int state)
 {
 	size_t	ms;
 
-	ms = get_time() - philo->data->start_time;
 	pthread_mutex_lock(&philo->data->print);
 	pthread_mutex_lock(&philo->data->mutex_manage);
 	if (philo->data->end_program == 1)
@@ -124,6 +123,7 @@ void	print_state(t_philo *philo, int state)
 		return ;
 	}
 	pthread_mutex_unlock(&philo->data->mutex_manage);
+	ms = get_time() - philo->data->start_time;
 	print_state_2(philo, state, ms);
 	pthread_mutex_unlock(&philo->data->print);
 }

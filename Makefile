@@ -10,7 +10,7 @@ NAME =philo
 
 CC = gcc
 #CFLAGS =-Wall -Werror -Wextra -fsanitize=thread -g3 -pthread
-CFLAGS =-Wall -Werror -Wextra -pthread -g3
+CFLAGS =-Wall -Werror -Wextra -pthread -O3
 
 SRC =	main.c \
 		init.c \
@@ -28,7 +28,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@echo "$(PINK)Compiling the philo.$(CLEAR)"
-	$(CC) $(OBJ) -o $(NAME) -pthread
+	$(CC) $(OBJ) -o $(NAME) -pthread -O3
 #	$(CC) $(OBJ) -o $(NAME) -fsanitize=thread -g3 -pthread
 	@echo "$(GREEN)[OK]\n$(CLEAR)$(GREEN)Success!$(CLEAR)\n"
 
@@ -53,14 +53,14 @@ re: fclean all
 .PHONY: clean fclean re all
 
 
-t1:
+t1: all
 	./philo 5 800 200 200
 
-t2:
+t2: all
 	./philo 5 800 200 200 7
 
-t3:
+t3: all
 	./philo 4 410 200 200
 
-t4:
-	./philo 3 410 200 100 
+t4: all
+	./philo 4 310 200 100 
