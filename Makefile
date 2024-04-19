@@ -19,7 +19,8 @@ SRC =	main.c \
 		rutine.c \
 		doctor.c \
 		rutine_habits.c \
-		time.c
+		time.c \
+		eat.c
 
 OBJ_DIR = obj/
 OBJ = $(SRC:%.c=$(OBJ_DIR)%.o)
@@ -63,4 +64,10 @@ t3: all
 	./philo 4 410 200 200
 
 t4: all
-	./philo 4 310 200 100 
+	./philo 4 310 200 100
+
+t5: all
+	./philo 1 310 200 100 
+
+t6: all
+	./philo 4 310 200 100 0

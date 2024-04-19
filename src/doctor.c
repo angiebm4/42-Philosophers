@@ -6,7 +6,7 @@
 /*   By: abarrio- <abarrio-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:45:41 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/04/15 21:07:05 by abarrio-         ###   ########.fr       */
+/*   Updated: 2024/04/19 13:53:09 by abarrio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,10 @@ void	*check_philo_stats(t_data *data, size_t all_satis)
 		i = 0;
 		while (i < data->info.nb_philo)
 		{
-
-			
 			pthread_mutex_lock(&data->philo[i].philo_manage);
 			if (data->info.time_die < get_time() - data->philo[i].last_time_eat)
 				return (someone_die(data, i));
-				
 			pthread_mutex_unlock(&data->philo[i].philo_manage);
-
-		
 			pthread_mutex_lock(&data->philo[i].philo_manage);
 			if (data->philo[i].satisfied == 1 && data->philo[i].flag == 0)
 			{
