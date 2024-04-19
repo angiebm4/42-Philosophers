@@ -6,7 +6,7 @@
 /*   By: abarrio- <abarrio-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 16:05:27 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/04/19 13:56:14 by abarrio-         ###   ########.fr       */
+/*   Updated: 2024/04/19 14:30:13 by abarrio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int	end_pthread(t_philo *philo)
 
 int	rutine_manage(t_philo *philo)
 {
+	if (philo->who % 2 != 0)
+		ft_usleep(10);
 	while (1)
 	{
 		if (end_pthread(philo) == 0)

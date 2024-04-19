@@ -1,0 +1,167 @@
+./philo 5 800 200 200 7
+[32m0 ms 3 has taken his left fork
+[0m[32m0 ms 3 has taken his rigth fork
+[0m[38;2;255;128;0m0 ms 3 is eating
+[0m[32m0 ms 5 has taken his left fork
+[0m[32m0 ms 5 has taken his rigth fork
+[0m[38;2;255;128;0m0 ms 5 is eating
+[0m[32m0 ms 1 has taken his left fork
+[0m[34m200 ms 3 is sleeping
+[0m[34m200 ms 5 is sleeping
+[0m[32m200 ms 1 has taken his rigth fork
+[0m[38;2;255;128;0m200 ms 1 is eating
+[0m[32m200 ms 4 has taken his rigth fork
+[0m[32m200 ms 4 has taken his left fork
+[0m[38;2;255;128;0m200 ms 4 is eating
+[0m[33m400 ms 5 is thinking
+[0m[34m400 ms 1 is sleeping
+[0m[32m400 ms 2 has taken his rigth fork
+[0m[32m400 ms 2 has taken his left fork
+[0m[38;2;255;128;0m400 ms 2 is eating
+[0m[33m400 ms 3 is thinking
+[0m[34m400 ms 4 is sleeping
+[0m[33m600 ms 4 is thinking
+[0m[34m600 ms 2 is sleeping
+[0m[32m600 ms 5 has taken his left fork
+[0m[32m600 ms 5 has taken his rigth fork
+[0m[32m600 ms 3 has taken his left fork
+[0m[32m600 ms 3 has taken his rigth fork
+[0m[38;2;255;128;0m600 ms 3 is eating
+[0m[38;2;255;128;0m600 ms 5 is eating
+[0m[33m600 ms 1 is thinking
+[0m[34m800 ms 5 is sleeping
+[0m[34m800 ms 3 is sleeping
+[0m[32m800 ms 1 has taken his left fork
+[0m[32m800 ms 1 has taken his rigth fork
+[0m[38;2;255;128;0m800 ms 1 is eating
+[0m[32m800 ms 4 has taken his rigth fork
+[0m[32m800 ms 4 has taken his left fork
+[0m[33m800 ms 2 is thinking
+[0m[38;2;255;128;0m800 ms 4 is eating
+[0m[34m1000 ms 4 is sleeping
+[0m[33m1000 ms 3 is thinking
+[0m[34m1000 ms 1 is sleeping
+[0m[32m1000 ms 2 has taken his rigth fork
+[0m[33m1000 ms 5 is thinking
+[0m[32m1000 ms 2 has taken his left fork
+[0m[38;2;255;128;0m1000 ms 2 is eating
+[0m[33m1200 ms 4 is thinking
+[0m[32m1200 ms 5 has taken his left fork
+[0m[32m1200 ms 5 has taken his rigth fork
+[0m[38;2;255;128;0m1200 ms 5 is eating
+[0m[33m1200 ms 1 is thinking
+[0m[34m1200 ms 2 is sleeping
+[0m[32m1200 ms 3 has taken his left fork
+[0m[32m1200 ms 3 has taken his rigth fork
+[0m[38;2;255;128;0m1200 ms 3 is eating
+[0m[34m1400 ms 5 is sleeping
+[0m[32m1400 ms 4 has taken his rigth fork
+[0m[33m1400 ms 2 is thinking
+[0m[32m1400 ms 4 has taken his left fork
+[0m[38;2;255;128;0m1400 ms 4 is eating
+[0m[32m1400 ms 1 has taken his left fork
+[0m[32m1400 ms 1 has taken his rigth fork
+[0m[38;2;255;128;0m1400 ms 1 is eating
+[0m[34m1400 ms 3 is sleeping
+[0m[34m1600 ms 4 is sleeping
+[0m[34m1600 ms 1 is sleeping
+[0m[32m1600 ms 2 has taken his rigth fork
+[0m[33m1600 ms 3 is thinking
+[0m[33m1600 ms 5 is thinking
+[0m[32m1600 ms 2 has taken his left fork
+[0m[38;2;255;128;0m1600 ms 2 is eating
+[0m[32m1800 ms 3 has taken his left fork
+[0m[33m1800 ms 1 is thinking
+[0m[32m1800 ms 3 has taken his rigth fork
+[0m[33m1800 ms 4 is thinking
+[0m[34m1800 ms 2 is sleeping
+[0m[38;2;255;128;0m1800 ms 3 is eating
+[0m[32m1800 ms 5 has taken his left fork
+[0m[32m1800 ms 5 has taken his rigth fork
+[0m[38;2;255;128;0m1800 ms 5 is eating
+[0m[32m2000 ms 1 has taken his left fork
+[0m[34m2000 ms 3 is sleeping
+[0m[33m2000 ms 2 is thinking
+[0m[32m2000 ms 1 has taken his rigth fork
+[0m[38;2;255;128;0m2000 ms 1 is eating
+[0m[32m2000 ms 4 has taken his rigth fork
+[0m[32m2000 ms 4 has taken his left fork
+[0m[38;2;255;128;0m2000 ms 4 is eating
+[0m[34m2000 ms 5 is sleeping
+[0m[33m2200 ms 3 is thinking
+[0m[34m2200 ms 4 is sleeping
+[0m[33m2200 ms 5 is thinking
+[0m[32m2200 ms 2 has taken his rigth fork
+[0m[32m2200 ms 2 has taken his left fork
+[0m[34m2200 ms 1 is sleeping
+[0m[38;2;255;128;0m2200 ms 2 is eating
+[0m[34m2400 ms 2 is sleeping
+[0m[32m2400 ms 3 has taken his left fork
+[0m[33m2400 ms 4 is thinking
+[0m[32m2400 ms 3 has taken his rigth fork
+[0m[38;2;255;128;0m2400 ms 3 is eating
+[0m[33m2400 ms 1 is thinking
+[0m[32m2400 ms 5 has taken his left fork
+[0m[32m2400 ms 5 has taken his rigth fork
+[0m[38;2;255;128;0m2400 ms 5 is eating
+[0m[33m2600 ms 2 is thinking
+[0m[34m2600 ms 3 is sleeping
+[0m[32m2600 ms 4 has taken his rigth fork
+[0m[34m2600 ms 5 is sleeping
+[0m[32m2600 ms 4 has taken his left fork
+[0m[38;2;255;128;0m2600 ms 4 is eating
+[0m[32m2600 ms 1 has taken his left fork
+[0m[32m2600 ms 1 has taken his rigth fork
+[0m[38;2;255;128;0m2600 ms 1 is eating
+[0m[33m2800 ms 3 is thinking
+[0m[34m2800 ms 1 is sleeping
+[0m[32m2800 ms 2 has taken his rigth fork
+[0m[34m2800 ms 4 is sleeping
+[0m[33m2800 ms 5 is thinking
+[0m[32m2800 ms 2 has taken his left fork
+[0m[38;2;255;128;0m2800 ms 2 is eating
+[0m[34m3000 ms 2 is sleeping
+[0m[32m3000 ms 3 has taken his left fork
+[0m[33m3000 ms 1 is thinking
+[0m[33m3000 ms 4 is thinking
+[0m[32m3000 ms 3 has taken his rigth fork
+[0m[38;2;255;128;0m3000 ms 3 is eating
+[0m[32m3000 ms 5 has taken his left fork
+[0m[32m3000 ms 5 has taken his rigth fork
+[0m[38;2;255;128;0m3000 ms 5 is eating
+[0m[32m3200 ms 1 has taken his left fork
+[0m[34m3200 ms 3 is sleeping
+[0m[34m3200 ms 5 is sleeping
+[0m[32m3200 ms 4 has taken his rigth fork
+[0m[32m3200 ms 4 has taken his left fork
+[0m[38;2;255;128;0m3200 ms 4 is eating
+[0m[33m3200 ms 2 is thinking
+[0m[32m3200 ms 1 has taken his rigth fork
+[0m[38;2;255;128;0m3200 ms 1 is eating
+[0m[34m3400 ms 4 is sleeping
+[0m[32m3400 ms 2 has taken his rigth fork
+[0m[33m3400 ms 5 is thinking
+[0m[33m3400 ms 3 is thinking
+[0m[32m3400 ms 2 has taken his left fork
+[0m[38;2;255;128;0m3400 ms 2 is eating
+[0m[34m3400 ms 1 is sleeping
+[0m[33m3600 ms 4 is thinking
+[0m[32m3600 ms 3 has taken his left fork
+[0m[34m3600 ms 2 is sleeping
+[0m[33m3600 ms 1 is thinking
+[0m[32m3600 ms 3 has taken his rigth fork
+[0m[38;2;255;128;0m3600 ms 3 is eating
+[0m[32m3600 ms 5 has taken his left fork
+[0m[32m3600 ms 5 has taken his rigth fork
+[0m[38;2;255;128;0m3600 ms 5 is eating
+[0m[33m3800 ms 2 is thinking
+[0m[32m3800 ms 4 has taken his rigth fork
+[0m[32m3800 ms 4 has taken his left fork
+[0m[38;2;255;128;0m3800 ms 4 is eating
+[0m[32m3800 ms 1 has taken his left fork
+[0m[32m3800 ms 1 has taken his rigth fork
+[0m[38;2;255;128;0m3800 ms 1 is eating
+[0m[32m4000 ms 2 has taken his rigth fork
+[0m[32m4000 ms 2 has taken his left fork
+[0m[38;2;255;128;0m4000 ms 2 is eating
+[0m
