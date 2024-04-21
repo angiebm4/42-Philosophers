@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abarrio- <abarrio-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angela <angela@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:16:02 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/04/15 20:52:21 by abarrio-         ###   ########.fr       */
+/*   Updated: 2024/04/21 15:19:56 by angela           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ struct					s_philo
 	size_t				who;
 
 	/* END FLAGS DOCTORSITO */
-	int					die;
 	pthread_mutex_t		philo_manage;
 	int					satisfied;
 	int					flag;
@@ -126,7 +125,6 @@ void					*rutine(void *src);
 int						ft_eat(t_philo *philo);
 void					ft_sleep(t_philo *philo);
 void					ft_thinking(t_philo *philo);
-int						is_death(t_philo *philo, int flag);
 
 /* START SIMULATION */
 void					start_simulation(t_data *data);

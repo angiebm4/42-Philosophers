@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rutine.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abarrio- <abarrio-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angela <angela@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 16:05:27 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/04/19 14:30:13 by abarrio-         ###   ########.fr       */
+/*   Updated: 2024/04/21 15:15:34 by angela           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,11 @@ int	end_pthread(t_philo *philo)
 
 int	rutine_manage(t_philo *philo)
 {
-	if (philo->who % 2 != 0)
-		ft_usleep(10);
+	
 	while (1)
 	{
+		if (philo->who % 2 != 0)
+			ft_usleep(10);
 		if (end_pthread(philo) == 0)
 		{
 			if (ft_eat(philo) == 1)
@@ -52,8 +53,6 @@ int	rutine_manage(t_philo *philo)
 			ft_thinking(philo);
 		else
 			return (1);
-		if (philo->data->info.nb_philo % 2 != 0 && philo->who % 2 != 0)
-			ft_usleep(philo->data->info.time_eat);
 	}
 	return (0);
 }
@@ -62,9 +61,6 @@ void	*one_philo(t_philo *philo)
 {
 	print_state(philo, TAKING_A_FORK_R);
 	ft_usleep(philo->data->info.time_die);
-	pthread_mutex_lock(&philo->philo_manage);
-	philo->die = 1;
-	pthread_mutex_unlock(&philo->philo_manage);
 	return (NULL);
 }
 
