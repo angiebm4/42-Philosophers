@@ -6,7 +6,7 @@
 /*   By: angela <angela@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:16:02 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/04/21 15:19:56 by angela           ###   ########.fr       */
+/*   Updated: 2024/04/25 13:54:19 by angela           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # define SLEEPING 4
 # define THINKING 5
 # define DEATH 6
+# define LET_FORKS 7
 
 typedef struct s_data	t_data;
 typedef struct s_philo	t_philo;
@@ -120,6 +121,7 @@ void					ft_usleep(uint64_t miliseconds);
 
 /* PHILOS RUTINE */
 void					*rutine(void *src);
+int	end_pthread(t_philo *philo);
 
 /* RUTINE HABITS */
 int						ft_eat(t_philo *philo);

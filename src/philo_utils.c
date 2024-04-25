@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abarrio- <abarrio-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angela <angela@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:26:59 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/04/16 00:07:42 by abarrio-         ###   ########.fr       */
+/*   Updated: 2024/04/25 13:55:37 by angela           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,17 +97,19 @@ static void	print_state_2(t_philo *philo, int state, size_t ms)
 	if (state == TAKING_A_FORK_L)
 		printf("%s%zu ms %zu has taken his left fork\n%s", GREEN, ms,
 			philo->who, CLEAR);
-	if (state == TAKING_A_FORK_R)
+	else if (state == TAKING_A_FORK_R)
 		printf("%s%zu ms %zu has taken his rigth fork\n%s", GREEN, ms,
 			philo->who, CLEAR);
-	if (state == THINKING)
+	else if (state == THINKING)
 		printf("%s%zu ms %zu is thinking\n%s", YELLOW, ms, philo->who, CLEAR);
-	if (state == EATING)
+	else if (state == EATING)
 		printf("%s%zu ms %zu is eating\n%s", ORANGE, ms, philo->who, CLEAR);
-	if (state == SLEEPING)
+	else if (state == SLEEPING)
 		printf("%s%zu ms %zu is sleeping\n%s", BLUE, ms, philo->who, CLEAR);
-	if (state == DEATH)
+	else if (state == DEATH)
 		printf("%s%zu ms %zu died\n%s", RED, ms, philo->who, CLEAR);
+	else if (state == LET_FORKS)
+		printf("%s%zu ms %zu Let fork\n%s", RED, ms, philo->who, CLEAR);
 }
 
 void	print_state(t_philo *philo, int state)

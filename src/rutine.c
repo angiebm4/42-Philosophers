@@ -6,7 +6,7 @@
 /*   By: angela <angela@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 16:05:27 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/04/21 15:15:34 by angela           ###   ########.fr       */
+/*   Updated: 2024/04/25 14:08:33 by angela           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ int	rutine_manage(t_philo *philo)
 	
 	while (1)
 	{
-		if (philo->who % 2 != 0)
-			ft_usleep(10);
+		if (philo->who % 2 == 0)
+			ft_usleep(1);
 		if (end_pthread(philo) == 0)
 		{
 			if (ft_eat(philo) == 1)
