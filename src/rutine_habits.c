@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rutine_habits.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angela <angela@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abarrio- <abarrio-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 22:36:25 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/04/25 14:29:07 by angela           ###   ########.fr       */
+/*   Updated: 2024/04/25 18:17:44 by abarrio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_thinking(t_philo *philo)
 {
 	print_state(philo, THINKING);
 	if (philo->data->info.nb_philo % 2 != 0)
-		ft_usleep(philo->data->info.time_eat * 2 - philo->data->info.time_sleep);
+		ft_usleep(philo->data->info.time_eat * 2 - philo->data->info.time_sleep - 1);
 		
 }
 
@@ -63,7 +63,7 @@ int	take_rigth_fork(t_data *data, int nb, int rigth)
 		}
 		if (end_pthread(&data->philo[nb - 1]) == 1)
 		{
-			pthread_mutex_unlock(&data->philo[nb - 1].rigth_fork->mutex_fork);
+			// pthread_mutex_unlock(&data->philo[nb - 1].rigth_fork->mutex_fork);
 			return (1);
 		}	
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angela <angela@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abarrio- <abarrio-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:16:02 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/04/25 13:54:19 by angela           ###   ########.fr       */
+/*   Updated: 2024/04/25 17:51:11 by abarrio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ void					print_state(t_philo *philo, int state);
 
 /* TIME MANAGE */
 size_t					get_time(void);
-void					ft_usleep(uint64_t miliseconds);
+void					ft_usleep(size_t time);
 
 /* PHILOS RUTINE */
 void					*rutine(void *src);

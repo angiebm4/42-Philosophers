@@ -6,31 +6,27 @@
 /*   By: abarrio- <abarrio-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 22:39:58 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/04/03 23:05:11 by abarrio-         ###   ########.fr       */
+/*   Updated: 2024/04/25 18:15:32 by abarrio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-static uint64_t	time_get_msec(uint64_t start)
+size_t	get_instant(void)
 {
-	uint64_t		ret;
-	struct timeval	time;
+	struct timeval	now;
 
-	gettimeofday(&time, NULL);
-	ret = time.tv_sec * 1000;
-	ret += time.tv_usec / 1000;
-	ret -= start;
-	return (ret);
+	gettimeofday(&now, NULL);
+	return (now.tv_sec * 1000 + now.tv_usec / 1000);
 }
 
-void	ft_usleep(uint64_t miliseconds)
+void	ft_usleep(size_t time)
 {
-	uint64_t	start;
+	size_t	begin;
 
-	start = time_get_msec(0);
-	while (time_get_msec(start) < miliseconds)
-		usleep(1);
+	begin = get_instant();
+	while (get_instant() - begin < time)
+		usleep(100);
 }
 
 size_t	get_time(void)

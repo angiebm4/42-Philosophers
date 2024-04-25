@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   doctor.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angela <angela@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abarrio- <abarrio-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:45:41 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/04/25 14:05:24 by angela           ###   ########.fr       */
+/*   Updated: 2024/04/25 18:29:11 by abarrio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,26 +45,21 @@ void	*check_philo_stats(t_data *data, size_t all_satis)
 		while (i < data->info.nb_philo)
 		{
 			pthread_mutex_lock(&data->philo[i].philo_manage);
-			if (data->info.time_die + 10 < get_time() - data->philo[i].last_time_eat)
+			if (data->info.time_die < get_time() - data->philo[i].last_time_eat)
 			{
-				pthread_mutex_lock(&data->philo[i].rigth_fork->mutex_fork);
-				pthread_mutex_lock(&data->philo[i].left_fork->mutex_fork);
-				printf("%lu : %d\n", data->philo[i - 1].who, data->philo[i].rigth_fork->fork);
-				printf("%lu : %d\n", data->philo[i + 1].who, data->philo[i].left_fork->fork);
-				pthread_mutex_unlock(&data->philo[i].rigth_fork->mutex_fork);
-				pthread_mutex_unlock(&data->philo[i].left_fork->mutex_fork);
-				printf("%lu\n", get_time() - data->philo[i].last_time_eat);
 				return (someone_die(data, i));
 			}
-				
 			pthread_mutex_unlock(&data->philo[i].philo_manage);
-			pthread_mutex_lock(&data->philo[i].philo_manage);
-			if (data->philo[i].satisfied == 1 && data->philo[i].flag == 0)
+			if (data->info.times_must_eat >= 0)
 			{
-				all_satis++;
-				data->philo[i].flag = 1;
+				pthread_mutex_lock(&data->philo[i].philo_manage);
+				if (data->philo[i].satisfied == 1 && data->philo[i].flag == 0)
+				{
+					all_satis++;
+					data->philo[i].flag = 1;
+				}
+				pthread_mutex_unlock(&data->philo[i].philo_manage);		
 			}
-			pthread_mutex_unlock(&data->philo[i].philo_manage);
 			i++;
 		}
 		if (all_satis == data->info.nb_philo)
@@ -79,13 +74,13 @@ void	*doc_rutine(void *src)
 	data = (t_data *)src;
 	while (1)
 	{
-		pthread_mutex_lock(&data->start_mutex);
+		// pthread_mutex_lock(&data->start_mutex);
 		if (data->init_program == 0)
 		{
-			pthread_mutex_unlock(&data->start_mutex);
+			// pthread_mutex_unlock(&data->start_mutex);
 			break ;
 		}
-		pthread_mutex_unlock(&data->start_mutex);
+		// pthread_mutex_unlock(&data->start_mutex);
 	}
 	return (check_philo_stats(data, 0));
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angela <angela@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abarrio- <abarrio-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:26:59 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/04/25 13:55:37 by angela           ###   ########.fr       */
+/*   Updated: 2024/04/25 18:15:38 by abarrio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,16 +116,16 @@ void	print_state(t_philo *philo, int state)
 {
 	size_t	ms;
 
-	pthread_mutex_lock(&philo->data->print);
-	pthread_mutex_lock(&philo->data->mutex_manage);
+	// pthread_mutex_lock(&philo->data->mutex_manage);
+	// pthread_mutex_lock(&philo->data->print);
 	if (philo->data->end_program == 1)
 	{
-		pthread_mutex_unlock(&philo->data->print);
-		pthread_mutex_unlock(&philo->data->mutex_manage);
+		// pthread_mutex_unlock(&philo->data->print);
+		// pthread_mutex_unlock(&philo->data->mutex_manage);
 		return ;
 	}
-	pthread_mutex_unlock(&philo->data->mutex_manage);
+	// pthread_mutex_unlock(&philo->data->mutex_manage);
 	ms = get_time() - philo->data->start_time;
 	print_state_2(philo, state, ms);
-	pthread_mutex_unlock(&philo->data->print);
+	// pthread_mutex_unlock(&philo->data->print);
 }
