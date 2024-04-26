@@ -6,7 +6,7 @@
 /*   By: abarrio- <abarrio-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 16:05:27 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/04/25 18:19:26 by abarrio-         ###   ########.fr       */
+/*   Updated: 2024/04/26 11:06:35 by abarrio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ int	end_pthread(t_philo *philo)
 	pthread_mutex_unlock(&philo->data->mutex_manage);
 	if (philo->times_eat == philo->data->info.times_must_eat)
 	{
-		// pthread_mutex_lock(&philo->philo_manage);
+		pthread_mutex_lock(&philo->philo_manage);
 		philo->satisfied = 1;
-		// pthread_mutex_unlock(&philo->philo_manage);
+		pthread_mutex_unlock(&philo->philo_manage);
 		return (1);
 	}
 	return (0);
@@ -33,11 +33,10 @@ int	end_pthread(t_philo *philo)
 
 int	rutine_manage(t_philo *philo)
 {
-	
+	if (philo->who % 2 == 0)
+		ft_usleep(philo->data->info.time_eat);
 	while (1)
 	{
-		if (philo->who % 2 == 0)
-			ft_usleep(1);
 		if (end_pthread(philo) == 0)
 		{
 			if (ft_eat(philo) == 1)

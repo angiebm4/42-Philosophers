@@ -6,7 +6,7 @@
 /*   By: abarrio- <abarrio-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 22:39:58 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/04/25 18:15:32 by abarrio-         ###   ########.fr       */
+/*   Updated: 2024/04/26 11:05:00 by abarrio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_usleep(size_t time)
 
 	begin = get_instant();
 	while (get_instant() - begin < time)
-		usleep(100);
+		usleep(200);
 }
 
 size_t	get_time(void)

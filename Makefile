@@ -10,8 +10,8 @@ NAME =philo
 
 CC = gcc
 #CFLAGS =-Wall -Werror -Wextra -fsanitize=thread -g3 -pthread
-#CFLAGS =-Wall -Werror -Wextra -fsanitize=address -g3 -pthread
-CFLAGS =-Wall -Werror -Wextra -pthread -O3
+CFLAGS =-Wall -Werror -Wextra -fsanitize=address -g3 -pthread
+#CFLAGS =-Wall -Werror -Wextra -pthread -O3
 
 SRC =	main.c \
 		init.c \
@@ -20,7 +20,8 @@ SRC =	main.c \
 		rutine.c \
 		doctor.c \
 		rutine_habits.c \
-		time.c 
+		time.c \
+		forks.c
 
 OBJ_DIR = obj/
 OBJ = $(SRC:%.c=$(OBJ_DIR)%.o)
@@ -29,9 +30,9 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@echo "$(PINK)Compiling the philo.$(CLEAR)"
-	$(CC) $(OBJ) -o $(NAME) -pthread -O3
+#	$(CC) $(OBJ) -o $(NAME) -pthread -O3
 #	$(CC) $(OBJ) -o $(NAME) -fsanitize=thread -g3 -pthread
-#	$(CC) $(OBJ) -o $(NAME) -fsanitize=address -g3 -pthread
+	$(CC) $(OBJ) -o $(NAME) -fsanitize=address -g3 -pthread
 	@echo "$(GREEN)[OK]\n$(CLEAR)$(GREEN)Success!$(CLEAR)\n"
 
 bonus: $(NAME)
@@ -74,4 +75,4 @@ t6: all
 	./philo 4 310 200 100 0
 
 t7: all
-	./philo 30 800 200 200
+	./philo 200 800 200 200
